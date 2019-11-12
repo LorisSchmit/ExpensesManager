@@ -78,7 +78,6 @@ def createGraphCollection(data):
     n = len(data)
     specs_sub = []
     specs = []
-    n3 = n//3
     for i in range(0,3):
         for j in range(0,4):
             type = {"type": "domain"}
@@ -137,6 +136,7 @@ def createGraph(data,month_index,year,tot):
     )
     fig.show()
     #fig.write_image("images/"+title+".pdf")
+
 
 
 months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober"]
