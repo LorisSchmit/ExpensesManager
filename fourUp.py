@@ -27,7 +27,7 @@ def toFourUp(inpfn):
     #inpfn, = sys.argv[1:]
     outfn = os.path.basename(inpfn)
     pages = PdfReader(inpfn).pages
-    print(pages)
+    #print(pages)
     writer = PdfWriter(outfn)
     for index in range(0, len(pages), 4):
         writer.addpage(getFour(pages[index:index + 4]))
