@@ -23,9 +23,10 @@ def total(transacts):
     for action in transacts:
         if action.tag != "income":
             tot += action.amount
-    return tot
+    return round(tot,2)
 
 def perTag(transacts):
+    tags_temp = {}
     tags = {}
     truth_table = []
     tot = 0
@@ -40,8 +41,17 @@ def perTag(transacts):
                 if transacts[i].tag == transacts[j].tag and truth_table[j]:
                     tot += transacts[j].amount
                     truth_table[j] = False
-            tot = round(tot,2)
-            tags[tag] = tot
+            tot = round(tot, 2)
+            tags_temp[tag] = tot
+
+    rest = 0
+    for tag in tags_temp:
+        if tags_temp[tag] >= 20:
+            tags[tag] = tags_temp[tag]
+        elif tags_temp[tag] > 0:
+            rest += float(tags_temp[tag])
+    rest = round(rest, 2)
+    tags['rest'] = rest
     return tags
 
 def biggestTag(tags):
@@ -74,35 +84,13 @@ def showTags():
         print(tags)
         print(biggestTag(tags))
 
-def createGraphCollection(data):
-    n = len(data)
-    specs_sub = []
-    specs = []
-    for i in range(0,3):
-        for j in range(0,4):
-            type = {"type": "domain"}
-            specs_sub.append(type)
-        specs.append(list(specs_sub))
-
-        specs_sub = []
-    print(specs)
-    fig = make_subplots(rows=n//3, cols=n//3+1,specs=specs)
-    print(str(n//3) + "   " + str(n//3+1))
-    for i,month in enumerate(data):
-        labels = list(month.keys())
-        values = list(month.values())
-        row = i//3+1
-        col = i%3+1
-        print(str(row)+"   "+str(col))
-        fig.add_trace(
-            go.Pie(labels=labels, values=values,name=str(i+1)+"/2019"),
-            row=i%3+1,col=i//3+1
-        )
-    fig.update_layout(width=400, height=1000,showlegend=False)
-    fig.update_traces(hoverinfo='label+percent', textinfo='label+value')
-    fig.show()
-    #embedGraph()
-    #py.plot(fig, filename='gdp_per_cap', auto_open=True)
+def createGraphCollection(months,year):
+    for month_index, month in enumerate(months):
+        transacts = getTransacts(month_index, year)
+        tags = perTag(transacts)
+        tot = total(transacts)
+        max = biggestTag(tags)[1]
+        createGraph(tags, month_index, year,tot,max)
 
 def embedGraph():
     with open('token.txt', mode="r") as token_file:
@@ -110,47 +98,46 @@ def embedGraph():
         api_key = token_file.readline()
     chart_studio.tools.set_credentials_file(username=username, api_key=api_key)
 
-def createGraph(data,month_index,year,tot):
+def createGraph(data,month_index,year,tot,max):
     labels = list(data.keys())
     values = list(data.values())
+    rot_fact = (3/8-max/tot)*8*55
+    if rot_fact<0:
+        rot_fact = 0
     title = months[month_index]+" "+year
-    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
-    fig.update_traces(textinfo='label+value',hoverinfo='percent')
-    fig.update_layout(height=900)
-    fig.update(layout_title_text=title, layout_showlegend=False, layout_title_x=0.5)
-    fig.update_layout(
-        annotations=[
-            go.layout.Annotation(
-                x=0.86,
-                y=0.96,
-                xref="paper",
-                yref="paper",
-                text="<b>Total : "+str(tot)+" €</b>",
-                font=dict(
-                    color="black",
-                    size=20
-                ),
-                showarrow=False,
-            )
-        ]
-    )
-    fig.show()
-    #fig.write_image("images/"+title+".pdf")
+    layout = dict(showlegend=False, width=400, height=515, margin=dict(l=5,t=0,r=10,b=0),
+                  font=dict(
+                      size=19
+                  ),
+                  annotations=[
+                      go.layout.Annotation(
+                          x=1,
+                          y=0.97,
+                          xref="paper",
+                          yref="paper",
+                          text="Total : " + str(tot) + " €",
+                          font=dict(
+                              color="black",
+                              size=20
+                          ),
+                          showarrow=False,
+                      )
+                    ],
+                  )
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)],layout=layout)
+    fig.update_traces(textinfo='label',hoverinfo='percent+value',rotation=rot_fact,)
+    #fig.show()
+    fig.write_image("images/"+title+".pdf")
 
 
 
 months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober"]
 year = "2019"
 tag_collection = []
-transacts = getTransacts(1,year)
+transacts = getTransacts(7,year)
 tags = perTag(transacts)
 tot = total(transacts)
 #embedGraph()
-createGraph(tags,1,year,tot)
-'''
-for month_index,month in enumerate(months):
-    transacts = getTransacts(month_index,year)
-    tags = perTag(transacts)
-    createGraph(tags,month_index,year)
-    tag_collection.append(tags)
-'''
+max = biggestTag(tags)[1]
+#createGraph(tags,7,year,tot,max)
+createGraphCollection(months,year)

@@ -2,10 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b292f6e-8195-413f-8a70-f0f87598eb9d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/createPDF.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fourUp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fourUp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fourUp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/April 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/April 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/August 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/August 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Februar 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/Februar 2019.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/Januar 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/Januar 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Juli 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/Juli 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Juni 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/Juni 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Mai 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/Mai 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/März 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/März 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Oktober 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/Oktober 2019.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/September 2019.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/images/September 2019.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/visualizeit.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualizeit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,17 +52,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tagging.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
+            <state relative-caret-position="105">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/visualizeit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="138" selection-start-line="138" selection-end-line="138" />
+            <state relative-caret-position="334">
+              <caret line="141" column="1" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -64,7 +73,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createPDF.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
+            <state relative-caret-position="690">
               <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -73,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fourUp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="4" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            <state relative-caret-position="301">
+              <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
               <folding>
                 <element signature="e#126#136#0" expanded="true" />
               </folding>
@@ -109,8 +118,9 @@
       <find>schm</find>
       <find>ama</find>
       <find>tres</find>
-      <find>prin</find>
       <find>-</find>
+      <find>pri</find>
+      <find>prin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,10 +133,10 @@
         <option value="$PROJECT_DIR$/Transaction.py" />
         <option value="$PROJECT_DIR$/accounting.py" />
         <option value="$PROJECT_DIR$/convert.py" />
-        <option value="$PROJECT_DIR$/tagging.py" />
         <option value="$PROJECT_DIR$/4up.py" />
-        <option value="$PROJECT_DIR$/fourUp.py" />
         <option value="$PROJECT_DIR$/createPDF.py" />
+        <option value="$PROJECT_DIR$/fourUp.py" />
+        <option value="$PROJECT_DIR$/tagging.py" />
         <option value="$PROJECT_DIR$/visualizeit.py" />
       </list>
     </option>
@@ -177,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.createPDF">
+  <component name="RunManager" selected="Python.visualizeit">
     <configuration name="convert" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BudgetManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -285,11 +295,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.visualizeit" />
+        <item itemvalue="Python.tagging" />
         <item itemvalue="Python.createPDF" />
         <item itemvalue="Python.fourUp" />
-        <item itemvalue="Python.visualizeit" />
         <item itemvalue="Python.convert" />
-        <item itemvalue="Python.tagging" />
       </list>
     </recent_temporary>
   </component>
@@ -304,6 +314,21 @@
       <option name="presentableId" value="Default" />
       <updated>1570274137261</updated>
     </task>
+    <task id="LOCAL-00001" summary="pdf creation added">
+      <created>1573552541261</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573552541261</updated>
+    </task>
+    <task id="LOCAL-00002" summary="tagging improved">
+      <created>1573728237270</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573728237270</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -324,7 +349,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32928064" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27157003" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25176802" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39886847" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -337,6 +362,11 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="pdf creation added" />
+    <MESSAGE value="tagging improved" />
+    <option name="LAST_COMMIT_MESSAGE" value="tagging improved" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/accounting.py">
@@ -359,13 +389,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tagging.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Transaction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -373,19 +396,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/visualizeit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="138" selection-start-line="138" selection-end-line="138" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/createPDF.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
+        <state relative-caret-position="690">
           <caret line="46" column="27" selection-start-line="46" selection-start-column="27" selection-end-line="46" selection-end-column="27" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -395,10 +408,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/fourUp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="4" lean-forward="true" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        <state relative-caret-position="301">
+          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding>
             <element signature="e#126#136#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tagging.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualizeit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="141" column="1" selection-start-line="141" selection-start-column="1" selection-end-line="141" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
         </state>
       </provider>
