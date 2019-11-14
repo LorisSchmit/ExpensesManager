@@ -1,13 +1,11 @@
 import csv
 
-file_giro = 'expenses.csv'
+file_giro = '2019/5 copy.csv'
 
-file_tagged = 'expenses_tagged.csv'
+file_tagged = '2019/5.csv'
 
 def auto_tag():
     transacts_giro = []
-    rest_list = []
-    copy_list = []
 
     with open(file_giro) as csv_file:
         csv_reader = csv.reader(csv_file,delimiter=",")
@@ -36,35 +34,17 @@ def auto_tag():
                 tag = "paypal"
             elif n[2].find("AMAZON") != -1:
                 tag = "amazon"
+            elif n[2].find("Saturn") != -1 or n[2].find("Media Markt") != -1:
+                tag = "electro"
+            elif n[2].find("THALIA") != -1:
+                tag = "book"
             else:
-                rest_list.append(n)
-                for row in copy_list:
-                    tag = input("tag: ")
+                print(n)
+                tag = input("tag: ")
             csv_writer.writerow([n[0],n[1],n[2],n[3],n[4],n[5],tag])
-        print(len(rest_list))
         csv_file.close()
     return transacts_giro
 
-'''
-def tag_rest():
-    transacts = []
-    with open(file_tagged, mode="r") as csv_file:
-        csv_reader = csv.reader(csv_file,delimiter=',')
-        for row in csv_reader:
-            transacts.append(row)
-        csv_file.close()
 
-    with open(file_tagged, mode="w") as csv_file:
-        csv_writer = csv.writer(csv_file,delimiter=',')
-        for n in transacts:
-            if n[6] == "":
-                print(n)
-                tag = input("tag: ")
-            else:
-                tag = n[6]
-            csv_writer.writerow([n[0], n[1], n[2], n[3], n[4], n[5], tag])
-
-'''
-
-#transacts = auto_tag()
-tag_rest()
+transacts = auto_tag()
+#tag_rest()
