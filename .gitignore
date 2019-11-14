@@ -6,4 +6,7 @@
 /venv
 /__pycache__
 token.txt
+<<<<<<< HEAD
 *.pdf
+=======
+>>>>>>> 005e8e3970a70abbefe1ae13f1d5a44c17bc7723
