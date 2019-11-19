@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7b292f6e-8195-413f-8a70-f0f87598eb9d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/importer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/BudgetManager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BudgetManager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/convert.py" beforeDir="false" afterPath="$PROJECT_DIR$/convert.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createPDF.py" beforeDir="false" afterPath="$PROJECT_DIR$/createPDF.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fourUp.py" beforeDir="false" afterPath="$PROJECT_DIR$/fourUp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tagging.py" beforeDir="false" afterPath="$PROJECT_DIR$/tagging.py" afterDir="false" />
-    </list>
+    <list default="true" id="7b292f6e-8195-413f-8a70-f0f87598eb9d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +34,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/importer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
+            <state relative-caret-position="289">
               <caret line="58" column="42" selection-start-line="58" selection-start-column="42" selection-end-line="58" selection-end-column="42" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
@@ -328,14 +318,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16521049" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16521049" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32928064" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27015558" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.27015558" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39817628" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -436,7 +425,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/importer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
+        <state relative-caret-position="289">
           <caret line="58" column="42" selection-start-line="58" selection-start-column="42" selection-end-line="58" selection-end-column="42" />
           <folding>
             <element signature="e#0#47#0" expanded="true" />

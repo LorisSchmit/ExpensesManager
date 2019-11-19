@@ -4,7 +4,7 @@
 *.csv
 /images
 /venv
-/.idea
+/idea
 /__pycache__
 token.txt
 <<<<<<< HEAD
