@@ -2,11 +2,13 @@
 /2018
 /2019
 *.csv
-/image
+/images
 /venv
+/.idea
 /__pycache__
 token.txt
 <<<<<<< HEAD
 *.pdf
+test.py
 =======
 >>>>>>> 005e8e3970a70abbefe1ae13f1d5a44c17bc7723

@@ -13,10 +13,16 @@ import os
 from pdfrw import PdfReader, PdfWriter, PageMerge
 
 
+def scale(fact):
+    writer = PdfWriter('test.pdf')
+    writer.addpage()
+
 def getFour(srcpages):
     scale = 0.5
     srcpages = PageMerge() + srcpages
     x_increment, y_increment = (scale * i for i in srcpages.xobj_box[2:])
+    print(x_increment)
+    print(y_increment)
     for i, page in enumerate(srcpages):
         page.scale(scale)
         page.x = x_increment if i & 1 else 0
@@ -25,11 +31,16 @@ def getFour(srcpages):
 
 def toFourUp(inpfn):
     #inpfn, = sys.argv[1:]
+    months = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober"]
     outfn = os.path.basename(inpfn)
-    pages = PdfReader(inpfn).pages
-    #print(pages)
+    pages = []
+
+    for month in months:
+        dir = "images/"+month+" 2019.pdf"
+        pages.append(PdfReader(dir).getPage(0))
+
     writer = PdfWriter(outfn)
-    for index in range(0, len(pages), 4):
-        writer.addpage(getFour(pages[index:index + 4]))
+    for index in range(0, len(pages), 10):
+        writer.addpage(getFour(pages[index:index + 10]))
     writer.write()
 
