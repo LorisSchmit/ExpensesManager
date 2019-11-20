@@ -1,9 +1,6 @@
-import csv
-
-
 def tag(transacts):
     for n in transacts:
-        if n[2].find("SCHMIT LORIS CARLO") != -1 or n[2].find("TRESORERIE")!= -1 or n[3] == "Argent de poche et repas":
+        if n[2].find("SCHMIT LORIS") != -1 or n[2].find("TRESORERIE")!= -1 or n[3] == "Argent de poche et repas":
             tag = "Einkommen"
         elif n[2].find("SCHECK-IN") != -1 or n[2].find("REWE") != -1 or n[2].find("KAUFLAND") != -1 or  n[2].find("DER FRISCHE MARKT") != -1 or n[2].find("Cactus") != -1:
             tag = "Essen"

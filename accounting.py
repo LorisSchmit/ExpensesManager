@@ -59,7 +59,7 @@ for n in transacts_giro:
     #if n[1] != "UTILISATION CARTE DE DEBIT" and n[2].find("SCHMIT") == -1 and n[2].find("TRESORERIE") == -1:
         #print(n[0]+","+n[1]+","+n[2]+","+n[3]+","+n[4])
     tot_giro -= float(n[4])
-    if n[2].find("SCHMIT LORIS CARLO") != -1 or n[2].find("TRESORERIE")!= -1 or n[3] == " Argent de poche et repas":
+    if n[2].find("SCHMIT LORIS") != -1 or n[2].find("TRESORERIE")!= -1 or n[3] == " Argent de poche et repas":
         tot_spent -= float(n[4])
         found = True
     if n[2].find("SCHECK-IN") != -1 or n[2].find("REWE") != -1:

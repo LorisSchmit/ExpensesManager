@@ -1,4 +1,4 @@
-from convert import toMonths,saveMonths,readCSV
+from convert import toMonths,saveMonths,readNewCSV
 from tagging import tag
 import csv
 import os
@@ -28,7 +28,7 @@ def importNewFile(file):
 
     last_element = old_transacts[0]
 
-    lines = readCSV(file)
+    lines = readNewCSV(file)
 
     i = 0
     found = False
@@ -55,10 +55,20 @@ def getFile():
     return file_path
 
 
-file = getFile()
-new_transacts_tagged = importNewFile(file)
-months = toMonths(new_transacts_tagged)
-saveMonths(months)
+
+def main():
+    file = getFile()
+    new_transacts_tagged = importNewFile(file)
+    months = toMonths(new_transacts_tagged)
+    saveMonths(months)
+
+def secMain():
+    file = getFile()
+    new_savings_tagged = importNewFile()
+
+if __name__ == "__main__":
+    main()
+
 
 
 

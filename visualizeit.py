@@ -1,11 +1,7 @@
 import csv
-import datetime
 from Transaction import Transaction
-from fpdf import FPDF
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import chart_studio
-import chart_studio.plotly as py
 #!
 
 def getTransacts(month,year):
@@ -129,15 +125,17 @@ def createGraph(data,month_index,year,tot,max):
     #fig.show()
     fig.write_image("images/"+title+".pdf")
 
+def main():
+    months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober"]
+    year = "2019"
+    tag_collection = []
+    transacts = getTransacts(7,year)
+    tags = perTag(transacts)
+    tot = total(transacts)
+    #embedGraph()
+    max = biggestTag(tags)[1]
+    #createGraph(tags,7,year,tot,max)
+    createGraphCollection(months,year)
 
-
-months = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober"]
-year = "2019"
-tag_collection = []
-transacts = getTransacts(7,year)
-tags = perTag(transacts)
-tot = total(transacts)
-#embedGraph()
-max = biggestTag(tags)[1]
-#createGraph(tags,7,year,tot,max)
-createGraphCollection(months,year)
+if __name__ == "__main__":
+    main()
