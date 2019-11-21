@@ -27,13 +27,6 @@ def readNewCSV(file):
                 transacts.append(transact)
     return transacts
 
-def readCSV(file):
-    with open(file,mode="r") as csv_file:
-        csv_reader=csv.reader(csv_file,delimiter=";")
-        transacts = []
-        for row in csv_reader:
-            transacts.append(row)
-    return transacts
 
 def toMonths(transacts):
     #transacts = readCSV(file)
@@ -54,7 +47,6 @@ def toMonths(transacts):
         month0 = month
     if len(monthly_transacts) != 0:
         months.append(monthly_transacts)
-
     return months
 
 def saveMonths(months):

@@ -6,8 +6,6 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 
-
-
 def listdir_nohidden(path):
     files = []
     for f in os.listdir(path):
