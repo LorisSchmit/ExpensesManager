@@ -5,8 +5,10 @@
 /images
 /venv
 /idea
+/Balance Sheets
 /__pycache__
 token.txt
+budget
 <<<<<<< HEAD
 *.pdf
 test.py
