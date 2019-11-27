@@ -22,6 +22,26 @@ def defineFiles(start_year,suffix):
     files.sort()
     return files
 
+def getExpensesData(year):
+    files = defineFiles(year, "")
+    expenses_data = []
+    for file in files:
+        expenses_data.extend(readCSVtoObjectExpense(file))
+    return expenses_data
+
+def getTotalExpenses(year):
+    expenses_data = getExpensesData(year)
+    tot = total(expenses_data)
+    return tot
+
+def biggestTag(tags):
+    max_key = next(iter(tags))
+    max = tags[max_key]
+    for tag in tags:
+        if tags[tag] > max:
+            max_key = tag
+            max = tags[tag]
+    return (max_key,max)
 
 def total(transacts):
     tot = 0
