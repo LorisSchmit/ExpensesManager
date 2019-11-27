@@ -2,13 +2,15 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from operator import itemgetter
 
-from commonFunctions import perWeek,readCSVtoObjectExpense,monthNumberToMonthName,total,perTag
+import os
+
+from commonFunctions import perWeek,readCSVtoObjectExpense,monthNumberToMonthName,total,perTag,defineFiles
 from reportlab.graphics import renderPDF
 from svglib.svglib import svg2rlg
 
 from reportlab.platypus import Table, TableStyle
 
-from budget import getBudgetPerYear,getBudgetPerMonth
+from budget import getBudgetPerMonth,getBudget
 
 
 def drawMyRuler(pdf):
@@ -31,66 +33,51 @@ def drawMyRuler(pdf):
     pdf.drawString(10, 800, 'y800')
 
 
-def drawPDF(file,month,year):
-    file_name = "Balance Sheets/"+str(month+1)+"-"+file+".pdf"
-    image_path = "images/"+file+".svg"
-    document_title = file
-    title = file
-    transacts = readCSVtoObjectExpense(month, year)
+def drawPDF(file,month,year,start_year):
+    years = str(start_year)[2:]+"_"+str(start_year+1)[2:]
+
+    file_name = "Balance Sheets"+years+"/"+year+"-"+str(month)+".pdf"
+
+    image_path = file+".svg"
+    document_title = month+" "+year
+    title = monthNumberToMonthName(int(month)-1)+" "+year
+    transacts = readCSVtoObjectExpense(file)
     total_spent = total(transacts)
 
     pdf = canvas.Canvas(file_name)
-    #drawMyRuler(pdf)
 
     pdf.setTitle(document_title)
 
     drawImage(image_path,pdf)
 
-    pdf.setFont("Helvetica", 18)
-
     tags = perTag(transacts)
-    pdf.drawString(350,720,'Ausgaben pro Kategorie')
-    pdf.line(350,718,546,718)
-    t_category = drawCategoryTable(tags)
-    t_category.wrapOn(pdf,500,300)
-    t_category.drawOn(pdf,400,700-len(tags)*25)
+    drawCategoryTable(pdf,tags)
 
     pdf.setFont("Helvetica-Bold", 30)
     pdf.drawCentredString(300, 780, title)
 
-    pdf.setFont("Helvetica", 18)
-
-
     weeks = perWeek(transacts)
-    pdf.drawString(50, 320, 'Ausgaben pro Woche')
-    pdf.line(50,318,225,318)
-    t_weeks = drawWeeksTable(weeks,8)
-    t_weeks.wrapOn(pdf,500, 300)
-    t_weeks.drawOn(pdf,50, 250)
+    drawWeeksTable(pdf,weeks,int(month),int(year))
 
     pdf.line(50, 220, 540, 220)
 
-
-    pdf.drawString(50,185,'Bilanz')
-    pdf.line(50, 183, 100, 183)
-    budget = getBudgetPerMonth(getBudgetPerYear(2018))
-    t_balance = drawBalanceTable(budget,total_spent)
-    t_balance.wrapOn(pdf,500,300)
-    t_balance.drawOn(pdf,50,95)
+    budget = getBudgetPerMonth(getBudget(2018))
+    drawBalanceTable(pdf,budget,total_spent)
 
     pdf.setFont("Helvetica-Bold", 22)
     pdf.drawString(50,50,"Gesamtausgaben: "+str(total_spent)+" €")
 
-
+    if not ("Balance Sheets"+years in os.listdir()):
+        os.mkdir("Balance Sheets"+years)
     pdf.save()
+
 
 
 def drawImage(image_path,pdf):
     drawing = svg2rlg(image_path)
-    #drawing.renderScale = 0.001
     renderPDF.draw(drawing, pdf,  -150, 350)
 
-def drawWeeksTable(weeks,month):
+def drawWeeksTable(pdf,weeks,month,year):
     data = []
     week_dates =[]
     for week in weeks.keys():
@@ -98,9 +85,9 @@ def drawWeeksTable(weeks,month):
         end = week[1].strftime("%d/%m")
         if week[0].month == week[1].month:
             week_dates.append(start+" - "+end)
-        elif week[0].month < month:
+        elif week[0].month < month and (week[0].year == year):
             week_dates.append("     - " + end)
-        elif week[1].month > month:
+        elif week[1].month > month or (week[0].year > year):
             week_dates.append(start + " -     ")
     data.append(reversed(week_dates))
     week_values = list(reversed(list(weeks.values())))
@@ -115,9 +102,13 @@ def drawWeeksTable(weeks,month):
                            ('VALIGN',(0,0),(-1,-1),'MIDDLE'),
                            ('FONTSIZE', (0, 0), (-1, -1), 15),
                            ]))
-    return t
+    pdf.setFont("Helvetica", 18)
+    pdf.drawString(50, 320, 'Ausgaben pro Woche')
+    pdf.line(50, 318, 225, 318)
+    t.wrapOn(pdf, 500, 300)
+    t.drawOn(pdf, 50, 250)
 
-def drawCategoryTable(tags):
+def drawCategoryTable(pdf,tags):
     data = []
     for key in tags.keys():
         data.append([key,tags[key]])
@@ -132,9 +123,13 @@ def drawCategoryTable(tags):
                            ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                            ('FONTSIZE', (0, 0), (-1, -1), 15),
                            ]))
-    return t
+    pdf.setFont("Helvetica", 18)
+    pdf.drawString(350, 720, 'Ausgaben pro Kategorie')
+    pdf.line(350, 718, 546, 718)
+    t.wrapOn(pdf, 500, 300)
+    t.drawOn(pdf, 400, 700 - len(tags) * 25)
 
-def drawBalanceTable(budget,spent):
+def drawBalanceTable(pdf,budget,spent):
     data = [['Gesamtausgaben',str(spent)+" €"],
             ['Budget pro Monat', str(budget)+" €"]]
     balance = round(budget-spent,2)
@@ -153,26 +148,26 @@ def drawBalanceTable(budget,spent):
 
     data.append([balance_str,str(balance)+" €"])
 
-
     rowHeights = len(data) * [25]
+    pdf.drawString(50, 185, 'Bilanz')
+    pdf.line(50, 183, 100, 183)
     t = Table(data,rowHeights=rowHeights)
     t.setStyle(TableStyle(style))
+    t.wrapOn(pdf, 500, 300)
+    t.drawOn(pdf, 50, 95)
     return t
 
-
-
-def drawPDFCollection():
-    for i in range(0,9):
-        file = monthNumberToMonthName(i)+" 2019"
-        print(file)
-        drawPDF(file,i,"2019")
-
+def drawPDFCollection(start_year):
+    files = defineFiles(start_year,"")
+    for file in files:
+        month = file[5:]
+        year = file[:4]
+        drawPDF(file,month,year,start_year)
 
 def main():
-    #drawPDF("Januar 2019",0,"2019")
-    drawPDFCollection()
+    #drawPDF("2018/10","10","2018",2018)
+    drawPDFCollection(2018)
     #test()
-    transacts = readCSVtoObjectExpense(7, "2019")
     #drawCategoryTable(transacts)
 if __name__ == "__main__":
     main()

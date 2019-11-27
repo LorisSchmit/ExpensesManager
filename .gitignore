@@ -8,7 +8,11 @@
 /Balance Sheets
 /__pycache__
 token.txt
-budget
+budget2018
+budget2019
+convert.pyc
+importer.pyc
+tagging.pyc
 <<<<<<< HEAD
 *.pdf
 test.py
