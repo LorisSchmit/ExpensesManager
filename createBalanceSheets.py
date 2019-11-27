@@ -48,7 +48,7 @@ def drawPDF(file,month,year,start_year):
 
     pdf.setTitle(document_title)
 
-    drawImage(image_path,pdf)
+    drawImage(image_path,pdf,-150, 350)
 
     tags = perTag(transacts)
     drawCategoryTable(pdf,tags)
@@ -62,7 +62,7 @@ def drawPDF(file,month,year,start_year):
     pdf.line(50, 220, 540, 220)
 
     budget = getBudgetPerMonth(getBudget(2018))
-    drawBalanceTable(pdf,budget,total_spent)
+    drawBalanceTable(pdf,budget,total_spent,50,95)
 
     pdf.setFont("Helvetica-Bold", 22)
     pdf.drawString(50,50,"Gesamtausgaben: "+str(total_spent)+" €")
@@ -71,11 +71,10 @@ def drawPDF(file,month,year,start_year):
         os.mkdir("Balance Sheets"+years)
     pdf.save()
 
-
-
-def drawImage(image_path,pdf):
+def drawImage(image_path,pdf,x,y,scale):
     drawing = svg2rlg(image_path)
-    renderPDF.draw(drawing, pdf,  -150, 350)
+    drawing.scale(scale,scale)
+    renderPDF.draw(drawing, pdf, x,y)
 
 def drawWeeksTable(pdf,weeks,month,year):
     data = []
@@ -129,7 +128,7 @@ def drawCategoryTable(pdf,tags):
     t.wrapOn(pdf, 500, 300)
     t.drawOn(pdf, 400, 700 - len(tags) * 25)
 
-def drawBalanceTable(pdf,budget,spent):
+def drawBalanceTable(pdf,budget,spent,x,y):
     data = [['Gesamtausgaben',str(spent)+" €"],
             ['Budget pro Monat', str(budget)+" €"]]
     balance = round(budget-spent,2)
@@ -149,12 +148,12 @@ def drawBalanceTable(pdf,budget,spent):
     data.append([balance_str,str(balance)+" €"])
 
     rowHeights = len(data) * [25]
-    pdf.drawString(50, 185, 'Bilanz')
-    pdf.line(50, 183, 100, 183)
+    pdf.drawString(x, y+90, 'Bilanz')
+    pdf.line(x, y+88, x+50, y+88)
     t = Table(data,rowHeights=rowHeights)
     t.setStyle(TableStyle(style))
     t.wrapOn(pdf, 500, 300)
-    t.drawOn(pdf, 50, 95)
+    t.drawOn(pdf, x, y)
     return t
 
 def drawPDFCollection(start_year):
