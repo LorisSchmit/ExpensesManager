@@ -1,6 +1,7 @@
 import os
 import csv
-from convert import toMonths,saveMonths
+from commonFunctions import weekNumberToDates
+import datetime
 
 def listdir_nohidden(path):
     files = []
@@ -11,11 +12,6 @@ def listdir_nohidden(path):
 
 year = "2019"
 
-transacts = []
 
-with open(year+"/8.csv",mode="r") as csv_file:
-    csv_reader = csv.reader(csv_file,delimiter=";")
-    for row in csv_reader:
-        transacts.append(row)
+print(weekNumberToDates(2019,0))
 
-saveMonths(toMonths(transacts))

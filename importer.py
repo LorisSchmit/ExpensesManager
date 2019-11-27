@@ -6,12 +6,8 @@ import os
 import tkinter as tk
 from tkinter import filedialog
 
-def listdir_nohidden(path):
-    files = []
-    for f in os.listdir(path):
-        if not f.startswith('.'):
-            files.append(int(f[:-4]))
-    return files
+from commonFunctions import listdir_nohidden
+
 
 def importNewFile(file):
     year = "2019"
