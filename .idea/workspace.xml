@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7b292f6e-8195-413f-8a70-f0f87598eb9d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/balancePlot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commonFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/commonFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createBalanceSheets.py" beforeDir="false" afterPath="$PROJECT_DIR$/createBalanceSheets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createYearlySheet.py" beforeDir="false" afterPath="$PROJECT_DIR$/createYearlySheet.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fourUp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Requirements" beforeDir="false" afterPath="$PROJECT_DIR$/Requirements" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,22 +15,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/createBalanceSheets.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/budget.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="106" selection-start-line="6" selection-start-column="106" selection-end-line="6" selection-end-column="106" />
+            <state relative-caret-position="192">
+              <caret line="20" column="116" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="20" selection-end-column="116" />
+              <folding>
+                <element signature="e#3#12#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/createYearlySheet.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/balancePlot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1725">
-              <caret line="115" column="4" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
+            <state relative-caret-position="242">
+              <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
               <folding>
-                <element signature="e#0#42#0" expanded="true" />
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -40,43 +42,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/visualizeit.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
+            <state relative-caret-position="-19">
               <caret line="5" column="2" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="2" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/commonFunctions.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Transaction.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budget.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1005">
-              <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
-              <folding>
-                <element signature="e#3#12#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -134,6 +103,7 @@
         <option value="$PROJECT_DIR$/createYearlySheet.py" />
         <option value="$PROJECT_DIR$/commonFunctions.py" />
         <option value="$PROJECT_DIR$/createBalanceSheets.py" />
+        <option value="$PROJECT_DIR$/balancePlot.py" />
       </list>
     </option>
   </component>
@@ -184,8 +154,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.createPDF">
-    <configuration name="budget" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.balancePlot">
+    <configuration name="balancePlot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BudgetManager" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -197,7 +167,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/budget.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/balancePlot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -291,19 +261,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.budget" />
       <item itemvalue="Python.createPDF" />
       <item itemvalue="Python.visualizeit" />
       <item itemvalue="Python.test" />
       <item itemvalue="Python.budgetSheet" />
+      <item itemvalue="Python.balancePlot" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.balancePlot" />
         <item itemvalue="Python.createPDF" />
         <item itemvalue="Python.budgetSheet" />
         <item itemvalue="Python.visualizeit" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.budget" />
       </list>
     </recent_temporary>
   </component>
@@ -355,12 +325,12 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984985" visible="true" weight="0.10881652" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4984985" visible="true" weight="0.2025417" />
       <window_info id="Structure" order="1" sideWeight="0.5015015" side_tool="true" weight="0.109531336" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32928064" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2446959" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.417256" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39716312" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -480,29 +450,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Transaction.py">
+    <entry file="file://$PROJECT_DIR$/createBalanceSheets.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
+        <state relative-caret-position="90">
+          <caret line="6" column="106" selection-start-line="6" selection-start-column="106" selection-end-line="6" selection-end-column="106" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/budget.py">
+    <entry file="file://$PROJECT_DIR$/createYearlySheet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="70" column="20" selection-start-line="70" selection-start-column="20" selection-end-line="70" selection-end-column="20" />
+        <state relative-caret-position="1725">
+          <caret line="115" column="4" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
           <folding>
-            <element signature="e#3#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualizeit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -517,20 +477,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createYearlySheet.py">
+    <entry file="file://$PROJECT_DIR$/Transaction.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1725">
-          <caret line="115" column="4" selection-start-line="115" selection-start-column="4" selection-end-line="115" selection-end-column="4" />
+        <state relative-caret-position="15">
+          <caret line="1" column="34" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="20" column="116" lean-forward="true" selection-start-line="16" selection-start-column="4" selection-end-line="20" selection-end-column="116" />
           <folding>
-            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#3#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createBalanceSheets.py">
+    <entry file="file://$PROJECT_DIR$/visualizeit.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="106" selection-start-line="6" selection-start-column="106" selection-end-line="6" selection-end-column="106" />
+        <state relative-caret-position="-19">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/balancePlot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="33" column="28" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

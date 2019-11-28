@@ -2,5 +2,8 @@
 - add tagging √
 - create pie charts √
 - import new files √
-- replace transaction array by class
-- csv for reimbursments and cash incom
+- replace transaction array by class √
+- csv for reimbursments and cash income
+- create monthly balance sheets √
+- create yearly balance sheets √
+- create plot of balance throughout the year
