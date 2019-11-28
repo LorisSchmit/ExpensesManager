@@ -99,16 +99,15 @@ def perWeek(transacts):
             tot += action.amount
         else:
             week_dates = weekNumberToDates(date.year,week_number0)
-            weeks[week_dates] = round(tot,2)
+            weeks[week_dates] = str(round(tot,2))
             tot = action.amount
-
         week_number0 = week_number
     week_dates = weekNumberToDates(date.year, week_number0)
-    weeks[week_dates] = round(tot,2)
+    weeks[week_dates] =str(round(tot,2))
     return weeks
 
 def weekNumberToDates(year,week_number):
-    if year == 2018 or week_number < 6:
+    if year == 2018:
         week = week_number
     else:
         week = week_number-1

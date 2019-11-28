@@ -13,26 +13,6 @@ from reportlab.platypus import Table, TableStyle
 from budget import getBudgetPerMonth,getBudget
 
 
-def drawMyRuler(pdf):
-    pdf.drawString(100, 810, 'x100')
-    pdf.drawString(200, 810, 'x200')
-    pdf.drawString(300, 810, 'x300')
-    pdf.drawString(400, 810, 'x400')
-    pdf.drawString(500, 810, 'x500')
-    pdf.drawString(600, 810, 'x600')
-    pdf.drawString(700, 810, 'x700')
-    pdf.drawString(800, 810, 'x800')
-
-    pdf.drawString(10, 100, 'y100')
-    pdf.drawString(10, 200, 'y200')
-    pdf.drawString(10, 300, 'y300')
-    pdf.drawString(10, 400, 'y400')
-    pdf.drawString(10, 500, 'y500')
-    pdf.drawString(10, 600, 'y600')
-    pdf.drawString(10, 700, 'y700')
-    pdf.drawString(10, 800, 'y800')
-
-
 def drawPDF(file,month,year,start_year):
     years = str(start_year)[2:]+"_"+str(start_year+1)[2:]
 
@@ -48,7 +28,7 @@ def drawPDF(file,month,year,start_year):
 
     pdf.setTitle(document_title)
 
-    drawImage(image_path,pdf,-150, 350)
+    drawImage(image_path,pdf,-150, 350,1)
 
     tags = perTag(transacts)
     drawCategoryTable(pdf,tags)
@@ -84,10 +64,10 @@ def drawWeeksTable(pdf,weeks,month,year):
         end = week[1].strftime("%d/%m")
         if week[0].month == week[1].month:
             week_dates.append(start+" - "+end)
-        elif week[0].month < month and (week[0].year == year):
-            week_dates.append("     - " + end)
-        elif week[1].month > month or (week[0].year > year):
-            week_dates.append(start + " -     ")
+        elif (week[0].month < month and week[0].year == year) or (week[0].year < year):
+            week_dates.append("    - " + end)
+        elif week[1].month > month:
+            week_dates.append(start + " -    ")
     data.append(reversed(week_dates))
     week_values = list(reversed(list(weeks.values())))
     week_values_str = []
@@ -164,10 +144,15 @@ def drawPDFCollection(start_year):
         drawPDF(file,month,year,start_year)
 
 def main():
-    #drawPDF("2018/10","10","2018",2018)
+    #drawPDF("2019/1","1","2019",2018)
     drawPDFCollection(2018)
     #test()
     #drawCategoryTable(transacts)
+    #file = "2019/1"
+    ##transacts = readCSVtoObjectExpense(file)
+    #weeks = perWeek(transacts)
+    #print(weeks)
+
 if __name__ == "__main__":
     main()
 

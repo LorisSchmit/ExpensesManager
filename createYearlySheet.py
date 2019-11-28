@@ -111,9 +111,9 @@ def drawCategoryTable(pdf,tags):
 
 
 def main():
-    year = 2018
-    #orderGraph(year,True)
-    #orderGraph(year,False)
+    year = 2019
+    orderGraph(year,True)
+    orderGraph(year,False)
     createPDF(year)
 
 
