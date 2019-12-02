@@ -2,8 +2,6 @@ import csv
 from Transaction import Transaction
 import plotly.graph_objects as go
 
-
-
 def importSavings():
     transacts =[]
     with open("savings.csv", mode="r") as csv_file:
