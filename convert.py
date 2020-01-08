@@ -1,7 +1,6 @@
 #!
 import csv
 import datetime
-import importer
 
 def find_nth(str, needle ,n):
     haystack = str
@@ -68,7 +67,7 @@ def save(transacts,file_name):
             csv_writer.writerow(row)
 
 def main():
-    transacts_tagged = importer.tag(readNewCSV("Movements/savings_movements.csv"))
+    #transacts_tagged = importer.tag(readNewCSV("Movements/savings_movements.csv"))
     save(transacts_tagged,"savings.csv")
 
 if __name__ == "__main__":

@@ -28,7 +28,7 @@ def drawPDF(file,month,year,start_year):
 
     pdf.setTitle(document_title)
 
-    drawImage(image_path,pdf,-150, 350,1)
+    drawImage(image_path,pdf,-40, 30,0.7)
 
     tags = perTag(transacts)
     drawCategoryTable(pdf,tags)
@@ -144,14 +144,7 @@ def drawPDFCollection(start_year):
         drawPDF(file,month,year,start_year)
 
 def main():
-    #drawPDF("2019/1","1","2019",2018)
-    drawPDFCollection(2018)
-    #test()
-    #drawCategoryTable(transacts)
-    #file = "2019/1"
-    ##transacts = readCSVtoObjectExpense(file)
-    #weeks = perWeek(transacts)
-    #print(weeks)
+    drawPDFCollection(2019)
 
 if __name__ == "__main__":
     main()

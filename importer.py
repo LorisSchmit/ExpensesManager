@@ -48,13 +48,14 @@ def getFile():
     root.update()
     return file_path
 
-
-
-def main():
-    file = getFile()
+def importSave(file):
     new_transacts_tagged = importNewFile(file)
     months = toMonths(new_transacts_tagged)
     saveMonths(months)
+
+def main():
+    file = getFile()
+    importSave(file)
 
 def secMain():
     file = getFile()

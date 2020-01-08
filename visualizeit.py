@@ -40,11 +40,13 @@ def createGraph(data,name,tot,max,font_size):
     #fig.show()
     fig.write_image(name+".svg")
 
-def main(months):
-    year = "2019"
+def createGraphsYear(year):
+    months = defineFiles(int(year), "")
     createGraphCollection(months)
 
+def main():
+    year = "2019"
+    createGraphsYear(int(year))
+
 if __name__ == "__main__":
-    months = defineFiles(2018,"")
-    main(months)
-    print(months)
+    main()
