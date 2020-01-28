@@ -22,6 +22,10 @@ def defineFiles(start_year,suffix):
     files.sort()
     return files
 
+def object2list(action):
+    l = [action.date.strftime("%d/%m/%Y"), action.type, action.sender, action.reference, str(action.amount), action.currency, action.tag]
+    return l
+
 def getExpensesData(year):
     files = defineFiles(year, "")
     expenses_data = []
@@ -64,7 +68,8 @@ def readCSVtoObject(file):
     with open(file_name) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=";")
         for row in csv_reader:
-            transacts.append(Transaction(row[0],row[1],row[2],row[3],-float(row[4]),row[5],row[6]))
+            date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
+            transacts.append(Transaction(date,row[1],row[2],row[3],float(row[4]),row[5],row[6]))
     return transacts
 
 def readCSVtoObjectExpense(file):
@@ -74,7 +79,8 @@ def readCSVtoObjectExpense(file):
         csv_reader = csv.reader(csv_file, delimiter=";")
         for row in csv_reader:
             if row[6] != "Einkommen":
-                transacts.append(Transaction(row[0], row[1], row[2], row[3], -float(row[4]), row[5], row[6]))
+                date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
+                transacts.append(Transaction(date, row[1], row[2], row[3], float(row[4]), row[5], row[6]))
     return transacts
 
 def importByFiles(files):
@@ -87,23 +93,22 @@ def importByFiles(files):
     return transacts
 
 def perWeek(transacts):
-    #weekdays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']
     weeks = {}
-    date = datetime.datetime.strptime(transacts[0].date, "%d/%m/%Y")
+    date = transacts[0].date
     week_number0 = date.isocalendar()[1]
     tot = 0
     for action in transacts:
-        date = datetime.datetime.strptime(action.date, "%d/%m/%Y")
+        date = action.date
         week_number = date.isocalendar()[1]
         if week_number == week_number0:
             tot += action.amount
         else:
             week_dates = weekNumberToDates(date.year,week_number0)
-            weeks[week_dates] = str(round(tot,2))
+            weeks[week_dates] = str(-round(tot,2))
             tot = action.amount
         week_number0 = week_number
     week_dates = weekNumberToDates(date.year, week_number0)
-    weeks[week_dates] =str(round(tot,2))
+    weeks[week_dates] =str(-round(tot,2))
     return weeks
 
 def weekNumberToDates(year,week_number):
@@ -138,7 +143,7 @@ def perTag(transacts):
                 if transacts[i].tag == transacts[j].tag and truth_table[j]:
                     tot += transacts[j].amount
                     truth_table[j] = False
-            tot = round(tot, 2)
+            tot = -round(tot, 2)
             tags_temp[tag] = tot
 
     rest = 0
@@ -147,6 +152,6 @@ def perTag(transacts):
             tags[tag] = tags_temp[tag]
         elif tags_temp[tag] > 0:
             rest += float(tags_temp[tag])
-    rest = round(rest, 2)
+    rest = -round(rest, 2)
     tags['Rest'] = rest
     return tags

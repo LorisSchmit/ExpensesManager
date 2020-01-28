@@ -28,7 +28,7 @@ def drawPDF(file,month,year,start_year):
 
     pdf.setTitle(document_title)
 
-    drawImage(image_path,pdf,-40, 30,0.7)
+    drawImage(image_path,pdf,-40, 390,0.7)
 
     tags = perTag(transacts)
     drawCategoryTable(pdf,tags)
@@ -42,10 +42,10 @@ def drawPDF(file,month,year,start_year):
     pdf.line(50, 220, 540, 220)
 
     budget = getBudgetPerMonth(getBudget(2018))
-    drawBalanceTable(pdf,budget,total_spent,50,95)
+    drawBalanceTable(pdf,budget,-total_spent,50,95)
 
     pdf.setFont("Helvetica-Bold", 22)
-    pdf.drawString(50,50,"Gesamtausgaben: "+str(total_spent)+" €")
+    pdf.drawString(50,50,"Gesamtausgaben: "+str(-total_spent)+" €")
 
     if not ("Balance Sheets"+years in os.listdir()):
         os.mkdir("Balance Sheets"+years)
@@ -68,8 +68,8 @@ def drawWeeksTable(pdf,weeks,month,year):
             week_dates.append("    - " + end)
         elif week[1].month > month:
             week_dates.append(start + " -    ")
-    data.append(reversed(week_dates))
-    week_values = list(reversed(list(weeks.values())))
+    data.append(week_dates)
+    week_values = list(weeks.values())
     week_values_str = []
     for value in week_values:
         week_values_str.append(str(value)+" €")
@@ -144,8 +144,7 @@ def drawPDFCollection(start_year):
         drawPDF(file,month,year,start_year)
 
 def main():
-    drawPDFCollection(2019)
-
+    drawPDF("2018/10","10","2018",2018)
 if __name__ == "__main__":
     main()
 
