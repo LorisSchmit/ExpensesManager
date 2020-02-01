@@ -18,8 +18,10 @@ def createGraphCollection(months):
     for month in months:
         transacts = readCSVtoObject(month)
         tags = perTag(transacts)
-        tot = total(transacts)
+        tot = -total(transacts)
+        print("tot : "+str(tot))
         max = biggestTag(tags)[1]
+        print("max : "+str(max))
         createGraph(tags, month,tot,max,19)
 
 def embedGraph():
@@ -34,6 +36,8 @@ def createGraph(data,name,tot,max,font_size):
     rot_fact = (3/8-max/tot)*8*55
     if rot_fact<0:
         rot_fact = 0
+    if rot_fact > 360:
+        rot_fact-360
     layout = dict(showlegend=False,font=dict(size=font_size),margin=dict(l=0, r=0, t=0, b=0))
     fig = go.Figure(data=[go.Pie(labels=labels, values=values)],layout=layout)
     fig.update_traces(textinfo='label',hoverinfo='percent+value',rotation=rot_fact,)
