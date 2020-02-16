@@ -2,6 +2,7 @@
 /2018
 /2019
 /2020
+/dev
 *.csv
 /images
 /venv
@@ -10,8 +11,11 @@
 /Backup
 /__pycache__
 token.txt
+budgetYear.py
 budget2018
 budget2019
+balances.csv
+Account Movements.csv
 balance2018
 convert.pyc
 importer.pyc

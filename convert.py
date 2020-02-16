@@ -1,7 +1,7 @@
 #!
 import csv
 import datetime
-from commonFunctions import readCSVtoList,defineFiles
+from commonFunctions import readCSVtoList,object2list
 import tagging
 
 def find_nth(str, needle ,n):
@@ -14,19 +14,6 @@ def find_nth(str, needle ,n):
         nth_pos += pos+1
     return nth_pos
 
-def readNewCSV(file):
-    with open(file,mode="r") as csv_file:
-        csv_reader=csv.reader(csv_file,delimiter=";")
-        transacts = []
-        for index,row in enumerate(csv_reader):
-            if index > 3:
-                comma_pos = row[2].rfind(",")
-                sender = row[2][:comma_pos]
-                reference = row[2][comma_pos+2:]
-                amount = row[3].replace(",",".")
-                transact = [row[0],row[1],sender,reference,amount,row[4]]
-                transacts.append(transact)
-    return transacts
 
 
 def toMonths(transacts):
@@ -51,15 +38,14 @@ def toMonths(transacts):
 
 def saveMonths(months):
     for month in months:
-        date_str = month[0][0]
-        date = datetime.datetime.strptime(date_str, "%d/%m/%Y")
+        date = month[0].date
         month_number = str(date.month)
         year = str(date.year)
         file_name = year+"/"+month_number+".csv"
         with open(file_name, mode="w+") as csv_file:
             csv_writer = csv.writer(csv_file, delimiter=';')
             for action in month:
-                csv_writer.writerow(action)
+                csv_writer.writerow(object2list(action))
 
 def save(transacts,file_name):
     with open(file_name,mode="w+") as csv_file:
@@ -77,10 +63,10 @@ def getFirstTransact():
                 date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
                 if date.month != month0:
                     comma_pos = row[2].rfind(",")
-                    sender = row[2][:comma_pos]
+                    recipient = row[2][:comma_pos]
                     reference = row[2][comma_pos + 2:]
                     amount = row[3].replace(",", ".")
-                    transact = [row[0], row[1], sender, reference, amount, row[4]]
+                    transact = [row[0], row[1], recipient, reference, amount, row[4]]
                     first_transacts.append(transact)
                 month0 = date.month
         first_transacts_tagged = importer.tag(first_transacts)
@@ -104,7 +90,7 @@ def reverseTransacts(file):
 
 
 def main():
-    file = "2019/12.csv"
+    file = "2020/1.csv"
     transacts = reverseTransacts(file)
     save(transacts,file)
 

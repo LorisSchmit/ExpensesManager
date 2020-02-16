@@ -57,6 +57,7 @@ def drawImage(image_path,pdf,x,y,scale):
     renderPDF.draw(drawing, pdf, x,y)
 
 def drawWeeksTable(pdf,weeks,month,year):
+    print("Drawing "+str(month)+" - "+str(year))
     data = []
     week_dates =[]
     for week in weeks.keys():

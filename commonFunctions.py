@@ -3,11 +3,16 @@ from Transaction import Transaction
 import datetime
 import os
 
+from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA
+
 def listdir_nohidden(path):
     files = []
     for f in os.listdir(path):
         if not f.startswith('.'):
-            files.append(int(f[:-4]))
+            try:
+                files.append(int(f[:-4]))
+            except ValueError:
+                pass
     return files
 
 def defineFiles(start_year,suffix):
@@ -22,9 +27,21 @@ def defineFiles(start_year,suffix):
     files.sort()
     return files
 
+def displayTransacts(transacts):
+    for action in transacts:
+        print(object2list(action))
+
 def object2list(action):
-    l = [action.date.strftime("%d/%m/%Y"), action.type, action.sender, action.reference, str(action.amount), action.currency, action.tag]
+    l = [action.date.strftime("%d/%m/%Y"), action.type, action.recipient, action.reference, str(action.amount), action.currency, action.tag,action.account.name]
     return l
+
+def list2object(row):
+    o = Transaction(datetime.datetime.strptime(row[0],"%d/%m/%Y"),row[1],row[2],row[3],float(row[4]),row[5],row[6],accountName2account(row[7]))
+    return o
+
+def accountName2account(name):
+    accounts = {'Compte courant' : CC_LUX,'Girokonto' : GK_DE,'Compte épargne primaire':CE_LUX, 'Compte épargne secondaire': CE_LUX1, 'PayPal':PP, 'Visa': VISA}
+    return accounts[name]
 
 def getExpensesData(year):
     files = defineFiles(year, "")
@@ -69,8 +86,9 @@ def readCSVtoObject(file):
         csv_reader = csv.reader(csv_file, delimiter=";")
         for row in csv_reader:
             date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
-            transacts.append(Transaction(date,row[1],row[2],row[3],float(row[4]),row[5],row[6]))
+            transacts.append(Transaction(date,row[1],row[2],row[3],float(row[4]),row[5],row[6],accountName2account(row[7])))
     return transacts
+
 
 def readCSVtoObjectExpense(file):
     file_name = file+ ".csv"
@@ -80,7 +98,7 @@ def readCSVtoObjectExpense(file):
         for row in csv_reader:
             if row[6] != "Einkommen":
                 date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
-                transacts.append(Transaction(date, row[1], row[2], row[3], float(row[4]), row[5], row[6]))
+                transacts.append(Transaction(date, row[1], row[2], row[3], float(row[4]), row[5], row[6], accountName2account(row[7])))
     return transacts
 
 def importByFiles(files):
@@ -89,7 +107,7 @@ def importByFiles(files):
         with open(file, mode="r") as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=";")
             for row in csv_reader:
-                transacts.append(Transaction(row[0], row[1], row[2], row[3], float(row[4]), row[5], row[6]))
+                transacts.append(Transaction(row[0], row[1], row[2], row[3], float(row[4]), row[5], row[6], accountName2account(row[7])))
     return transacts
 
 def perWeek(transacts):
@@ -108,7 +126,7 @@ def perWeek(transacts):
             tot = action.amount
         week_number0 = week_number
     week_dates = weekNumberToDates(date.year, week_number0)
-    weeks[week_dates] =str(-round(tot,2))
+    weeks[week_dates] = str(-round(tot,2))
     return weeks
 
 def weekNumberToDates(year,week_number):
