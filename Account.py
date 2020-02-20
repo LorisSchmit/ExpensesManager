@@ -4,12 +4,16 @@ import csv
 
 def readExpense(action):
     action.account.balance += action.amount
-    action.account.update()
+    #print("Expense of "+str(action.amount)+" from "+action.account.name)
+    #print("Account balance "+str(CC_LUX.balance))
+    #action.account.update()
 
 def transferAccount(emitter_account, receiver_account,amount):
-    emitter_account.balance -= amount
-    receiver_account.balance += amount
-    updateAccounts([emitter_account,receiver_account])
+    emitter_account.balance -= abs(amount)
+    receiver_account.balance += abs(amount)
+    #print("Transferring "+str(amount)+" from "+emitter_account.name+" to "+receiver_account.name)
+    #print("Account balance "+str(CC_LUX.balance))
+    #updateAccounts([emitter_account,receiver_account])
 
 
 def getBalances():
@@ -35,8 +39,6 @@ def updateAccounts(accounts):
         balances[index][0] = round(account.balance,2)
         balances[index][1] = date
     saveBalances()
-
-
 
 
 class Account:

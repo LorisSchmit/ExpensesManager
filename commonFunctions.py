@@ -3,7 +3,7 @@ from Transaction import Transaction
 import datetime
 import os
 
-from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA
+from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA,GB
 
 def listdir_nohidden(path):
     files = []
@@ -40,7 +40,7 @@ def list2object(row):
     return o
 
 def accountName2account(name):
-    accounts = {'Compte courant' : CC_LUX,'Girokonto' : GK_DE,'Compte épargne primaire':CE_LUX, 'Compte épargne secondaire': CE_LUX1, 'PayPal':PP, 'Visa': VISA}
+    accounts = {'Compte courant' : CC_LUX,'Girokonto' : GK_DE,'Compte épargne primaire':CE_LUX, 'Compte épargne secondaire': CE_LUX1, 'PayPal':PP, 'Visa': VISA, 'Geldbeutel': GB}
     return accounts[name]
 
 def getExpensesData(year):
@@ -67,7 +67,7 @@ def biggestTag(tags):
 def total(transacts):
     tot = 0
     for action in transacts:
-        if action.tag != "Einkommen":
+        if action.tag != "Einkommen" and action.amount < 0:
             tot += action.amount
     return round(tot,2)
 
@@ -168,8 +168,16 @@ def perTag(transacts):
     for tag in tags_temp:
         if tags_temp[tag] >= 20:
             tags[tag] = tags_temp[tag]
+        elif tag == "Rückzahlung":
+            tags[tag] = -tags_temp[tag]
         elif tags_temp[tag] > 0:
             rest += float(tags_temp[tag])
-    rest = -round(rest, 2)
+    rest = round(rest, 2)
     tags['Rest'] = rest
     return tags
+
+def main():
+    transacts = readCSVtoObject('2020/1')
+    print(perTag(transacts))
+if __name__ == '__main__':
+    main()

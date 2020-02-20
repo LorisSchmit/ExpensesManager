@@ -5,7 +5,7 @@ from tagging import tag,tagObject
 import csv
 import datetime
 from Transaction import Transaction
-from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA, readExpense, transferAccount
+from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA, GB, readExpense, transferAccount
 
 from commonFunctions import readCSVtoObject,object2list,list2object,readCSVtoList,readCSVtoObject, accountName2account, defineFiles, displayTransacts
 from convert import saveMonths,save
@@ -38,19 +38,20 @@ def readNewCSVObject(file, account):
                 if account == VISA:
                     recipient = row[1].replace(",","")
                     reference = ''
-                    amount = row[3].replace(",",".")
+                    amount = float(row[3].replace(",","."))
                     date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
                     transact = Transaction(date,'Credit Card Transaction',recipient,reference,amount,row[4],'',account)
+                    readExpense(transact)
                     transacts.append(transact)
                 else:
                     comma_pos = row[2].rfind(",")
                     recipient = row[2][:comma_pos].replace(",","")
                     reference = row[2][comma_pos + 2:].replace(",","")
+                    typ = row[1]
                     amount = float(row[3].replace(",", "."))
                     date = datetime.datetime.strptime(row[0], "%d/%m/%Y")
-                    transact = Transaction(date, row[1], recipient, reference, amount, row[4], '', account)
+                    transact = Transaction(date, typ, recipient, reference, amount, row[4], '', account)
                     transacts.append(transact)
-    #transacts = list(reversed(transacts))
     return transacts
 
 def importNewFile(file,account):
@@ -93,9 +94,31 @@ def importNewFile(file,account):
         if action.date == last_element.date and action.reference == last_element.reference:
             found = True
         if not found:
+            print(action.recipient)
             if action.reference.find("PAYPAL") != -1 or action.recipient.find("SCHMIT LORIS CARLO") != -1 or action.recipient.find("Loris Schmit") != -1 or action.reference.find("RETRAIT BANCOMAT") != -1 or action.type.find("DECOMPTE VISA") != -1:
                 account_movements.append(action)
-                transferAccount(CC_LUX,action.account,action.amount)
+                if action.reference.find("PAYPAL") != -1:
+                    emitter_account = CC_LUX
+                    receiver_account = PP
+                elif action.recipient.find("SCHMIT LORIS CARLO") != -1:
+                    if action.type == "VERSEMENT":
+                        emitter_account = GB
+                        receiver_account = CC_LUX
+                        action.account = GB
+                    else:
+                        emitter_account = CE_LUX
+                        receiver_account = CC_LUX
+                        action.account = CE_LUX
+                elif action.recipient.find("Loris Schmit") != -1:
+                    emitter_account = CC_LUX
+                    receiver_account = GK_DE
+                elif action.reference.find("RETRAIT BANCOMAT") != -1:
+                    emitter_account = CC_LUX
+                    receiver_account = GB
+                elif action.type.find("DECOMPTE VISA") != -1:
+                    emitter_account = CC_LUX
+                    receiver_account = VISA
+                transferAccount(emitter_account,receiver_account,action.amount)
             else:
                 new_transacts.append(action)
                 readExpense(action)
@@ -118,19 +141,19 @@ def getFile():
     return file_path
 
 def importSave(file,account):
+    print("CC_LUX balance "+str(CC_LUX.balance))
+    print("PP balance "+str(PP.balance))
     imported_transacts = importNewFile(file,account)
     new_transacts = imported_transacts[0]
     account_movements = imported_transacts[1]
     old_account_movements = readCSVtoObject('Account Movements')
-    #for action in old_account_movements:
-     #   print(object2list(action))
     account_movements.extend(old_account_movements)
-    for action in new_transacts:
-        print(object2list(action))
-
     months = convert.toMonths(new_transacts)
+    print("CC_LUX balance "+str(CC_LUX.balance))
+    print("PP balance "+str(PP.balance))
+    displayTransacts(new_transacts)
     saveMonths(months)
-    saveObject(account_movements,"Account Movements")
+   # saveObject(account_movements,"Account Movements")
 
 
 def importPayPal(file):
@@ -138,13 +161,15 @@ def importPayPal(file):
         pp_transacts = []
         csv_reader = csv.reader(csv_file,delimiter=",")
         for index,row in enumerate(csv_reader):
-            if row[3] != "Bank Deposit to PP Account" and index > 0: #and (row[3] == "Express Checkout Payment" or row[3] == "Mobile Payment" or row[3] == "General Payment" or row[3] == "PreApproved Payment Bill User Payment")
+            if row[3] != "Bank Deposit to PP Account" and index > 0:
                 if row[9] != "":
                     amount = float(row[7])
                 else:
                     amount = float(row[5])
                 date = datetime.datetime.strptime(row[0], "%m/%d/%Y")
-                pp_transacts.append(Transaction(date,row[3],row[11],'',amount,row[4],'',PP))
+                transact = Transaction(date,row[3],row[11],'',amount,row[4],'',PP)
+                readExpense(transact)
+                pp_transacts.append(transact)
     return pp_transacts
 
 
@@ -159,7 +184,9 @@ def importDE(file):
     for row in transacts_list:
         amount_str = ('-')*(row[12] == 'S')+row[11].replace(',','.')
         amount = float(amount_str)
-        transacts.append(Transaction(datetime.datetime.strptime(row[0],'%d.%m.%Y'), row[2], row[3],row[8].replace("\n",""),amount,row[10],'',GK_DE))
+        transact = Transaction(datetime.datetime.strptime(row[0],'%d.%m.%Y'), row[2], row[3],row[8].replace("\n",""),amount,row[10],'',GK_DE)
+        readExpense(transact)
+        transacts.append(transact)
     transacts = list(reversed(transacts))
     return transacts
 
@@ -168,7 +195,7 @@ def includeTransacts(pp_transacts):
     pp_months = convert.toMonths(pp_transacts)
     for pp_month in pp_months:
         file = str(pp_month[0].date.year) + "/" + str(pp_month[0].date.month)
-        transacts = readCSVtoObject("dev/"+file)
+        transacts = readCSVtoObject(file)
         new_transacts = []
         i = 0
         for action in transacts:
@@ -181,8 +208,6 @@ def includeTransacts(pp_transacts):
                     new_transacts.append(action)
             else:
                 new_transacts.append(action)
-        for action in new_transacts:
-            print(object2list(action))
         new_transacts_months.append(new_transacts)
     return new_transacts_months
 
@@ -190,7 +215,7 @@ def includeTransacts(pp_transacts):
 def includeMonthlyTransacts(pp_transacts):
     new_transacts = []
     file = str(pp_transacts[0].date.year) + "/" + str(pp_transacts[0].date.month)
-    transacts = readCSVtoObject("dev/"+file)
+    transacts = readCSVtoObject(file)
     i = 0
     for action in transacts:
         if i < len(pp_transacts):
@@ -236,12 +261,14 @@ def accountFor(file, tag, account):
 
 
 def getPayPal(file):
+    print("PP balance "+str(PP.balance))
     pp_transacts = importPayPal(file)
     pp_transacts_tagged = tagObject(pp_transacts)
     new_transacts = includeMonthlyTransacts(pp_transacts_tagged)
     file_save = str(new_transacts[0].date.year) + "/" + str(new_transacts[0].date.month)
     saveObject(new_transacts,file_save)
-    ditch(file_save,'PayPal')
+    #ditch(file_save,'PayPal')
+    print("PP balance "+str(PP.balance))
     #accountFor(file_save,'PayPal',PP)
 
 def getDE(file):
@@ -294,7 +321,10 @@ def accountMovements():
 def main():
     file = "/Users/lorisschmit1/PycharmProjects/BudgetManager/Movements/Movements (7) copy.csv"
     #importSave(file,CC_LUX)
-    accountMovements()
+    #accountMovements()
+    #files = defineFiles(2019,"")
+    #for file in files:
+       # ditch(file,'Visa')
 
 if __name__ == "__main__":
     main()
