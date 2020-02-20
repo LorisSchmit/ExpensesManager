@@ -18,6 +18,7 @@ def createGraphCollection(months):
     for month in months:
         transacts = readCSVtoObject(month)
         tags = perTag(transacts)
+        print(tags)
         tot = -total(transacts)
         print("tot : "+str(tot))
         max = biggestTag(tags)[1]

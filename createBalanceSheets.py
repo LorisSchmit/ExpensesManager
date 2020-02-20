@@ -41,11 +41,15 @@ def drawPDF(file,month,year,start_year):
 
     pdf.line(50, 220, 540, 220)
 
-    budget = getBudgetPerMonth(getBudget(2018))
-    drawBalanceTable(pdf,budget,-total_spent,50,95)
+    try:
+        payback = tags['Rückzahlung']
+    except KeyError:
+        payback = 0
+    budget = getBudgetPerMonth(getBudget(int(start_year)))
+    drawBalanceTable(pdf,budget,-total_spent,payback,50,75)
 
     pdf.setFont("Helvetica-Bold", 22)
-    pdf.drawString(50,50,"Gesamtausgaben: "+str(-total_spent)+" €")
+    pdf.drawString(50,35,"Gesamtausgaben: "+str(-total_spent)+" €")
 
     if not ("Balance Sheets"+years in os.listdir()):
         os.mkdir("Balance Sheets"+years)
@@ -91,7 +95,8 @@ def drawWeeksTable(pdf,weeks,month,year):
 def drawCategoryTable(pdf,tags):
     data = []
     for key in tags.keys():
-        data.append([key,tags[key]])
+        if key != "Rückzahlung":
+            data.append([key,tags[key]])
     rowHeights = len(data) * [25]
     data = list(reversed(sorted(data, key=itemgetter(1))))
     for index,element in enumerate(data):
@@ -109,10 +114,11 @@ def drawCategoryTable(pdf,tags):
     t.wrapOn(pdf, 500, 300)
     t.drawOn(pdf, 400, 700 - len(tags) * 25)
 
-def drawBalanceTable(pdf,budget,spent,x,y):
+def drawBalanceTable(pdf,budget,spent,payback,x,y):
     data = [['Gesamtausgaben',str(spent)+" €"],
-            ['Budget pro Monat', str(budget)+" €"]]
-    balance = round(budget-spent,2)
+            ['Budget pro Monat', str(budget)+" €"],
+            ['Rückzahlung', str(payback)+" €"]]
+    balance = round(payback+budget-spent,2)
 
     style =[('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
                            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -121,16 +127,16 @@ def drawBalanceTable(pdf,budget,spent,x,y):
                            ]
     if balance > 0 :
         balance_str = "Suffizit"
-        style.append(['BACKGROUND', (0, 2), (1, 2), colors.lightgreen])
+        style.append(['BACKGROUND', (0, 3), (1, 3), colors.lightgreen])
     else:
         balance_str = "Defizit"
-        style.append(['BACKGROUND', (0, 2), (1, 2), colors.rgb2cmyk(255, 150, 110)])
+        style.append(['BACKGROUND', (0, 3), (1, 3), colors.rgb2cmyk(255, 150, 110)])
 
     data.append([balance_str,str(balance)+" €"])
 
     rowHeights = len(data) * [25]
-    pdf.drawString(x, y+90, 'Bilanz')
-    pdf.line(x, y+88, x+50, y+88)
+    pdf.drawString(x, y+110, 'Bilanz')
+    pdf.line(x, y+108, x+50, y+108)
     t = Table(data,rowHeights=rowHeights)
     t.setStyle(TableStyle(style))
     t.wrapOn(pdf, 500, 300)
@@ -145,7 +151,7 @@ def drawPDFCollection(start_year):
         drawPDF(file,month,year,start_year)
 
 def main():
-    drawPDF("2018/10","10","2018",2018)
+    drawPDFCollection(2019)
 if __name__ == "__main__":
     main()
 
