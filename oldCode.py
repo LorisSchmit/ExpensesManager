@@ -1,3 +1,7 @@
+from commonFunctions import readCSVtoList,list2object
+from importer import save,saveObject
+import csv
+
 def importPayPalOld(file):
     with open(file, mode="r") as csv_file:
         pp_transacts = []
@@ -38,7 +42,7 @@ def includePayPal(pp_transacts):
 
 def removeCommas():
     #files = defineFiles(2018,".csv")
-    files = ["2019/3.csv"]
+    files = ["2019/10.csv","2019/11.csv","2019/12.csv"]
     for file in files:
         transacts = readCSVtoList(file)
         new_transacts = []
@@ -64,7 +68,7 @@ def accountForIncome(file, account):
 
 def addAccount():
     #files = defineFiles(2018,".csv")
-    files = ["2019/3.csv"]
+    files = ["savings.csv"]
 
     for file in files:
         transacts = []
@@ -80,10 +84,14 @@ def addAccount():
                         el.append("Visa")
                     else:
                         el = row
-                        el.append("Compte courant")
+                        el.append("Compte épargne")
                     print(el)
                     transacts.append(el)
             transacts_obj = []
             for action in transacts:
                 transacts_obj.append(list2object(action))
         saveObject(transacts_obj,file[:-4])
+
+
+if __name__ == '__main__':
+    removeCommas()

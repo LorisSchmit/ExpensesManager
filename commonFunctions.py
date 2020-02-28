@@ -3,7 +3,7 @@ from Transaction import Transaction
 import datetime
 import os
 
-from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA,GB
+from Account import CC_LUX,CE_LUX,GK_DE,PP,VISA,GB
 
 def listdir_nohidden(path):
     files = []
@@ -27,6 +27,12 @@ def defineFiles(start_year,suffix):
     files.sort()
     return files
 
+def checkIfInYear(date,year):
+    if (date.year == year and date.month > 9) or (date.year == year+1 and date.month <= 9):
+        return True
+    else:
+        return False
+
 def displayTransacts(transacts):
     for action in transacts:
         print(object2list(action))
@@ -40,7 +46,7 @@ def list2object(row):
     return o
 
 def accountName2account(name):
-    accounts = {'Compte courant' : CC_LUX,'Girokonto' : GK_DE,'Compte épargne primaire':CE_LUX, 'Compte épargne secondaire': CE_LUX1, 'PayPal':PP, 'Visa': VISA, 'Geldbeutel': GB}
+    accounts = {'Compte courant' : CC_LUX,'Girokonto' : GK_DE,'Compte épargne':CE_LUX, 'PayPal':PP, 'Visa': VISA, 'Geldbeutel': GB}
     return accounts[name]
 
 def getExpensesData(year):
@@ -177,7 +183,7 @@ def perTag(transacts):
     return tags
 
 def main():
-    transacts = readCSVtoObject('2020/1')
-    print(perTag(transacts))
+    date = datetime.datetime.strptime("08/08/2020","%d/%m/%Y")
+    print(checkIfInYear(date,2019))
 if __name__ == '__main__':
     main()

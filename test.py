@@ -1,7 +1,7 @@
 from Transaction import Transaction
 import datetime
 from Account import CC_LUX
-from commonFunctions import object2list
+from commonFunctions import object2list,readCSVtoObject
 import csv
 from tagging import tagObject
 from importer import saveObject
@@ -21,6 +21,7 @@ def readNewCSVObject(file):
                 transacts.append(transact)
     transacts = list(reversed(transacts))
     return transacts
+
 
 def main():
     file = "/Users/lorisschmit1/PycharmProjects/BudgetManager/Movements/Movements.csv"

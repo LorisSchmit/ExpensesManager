@@ -6,14 +6,14 @@ def readExpense(action):
     action.account.balance += action.amount
     #print("Expense of "+str(action.amount)+" from "+action.account.name)
     #print("Account balance "+str(CC_LUX.balance))
-    #action.account.update()
+    action.account.update()
 
 def transferAccount(emitter_account, receiver_account,amount):
     emitter_account.balance -= abs(amount)
     receiver_account.balance += abs(amount)
     #print("Transferring "+str(amount)+" from "+emitter_account.name+" to "+receiver_account.name)
     #print("Account balance "+str(CC_LUX.balance))
-    #updateAccounts([emitter_account,receiver_account])
+    updateAccounts([emitter_account,receiver_account])
 
 
 def getBalances():
@@ -43,8 +43,8 @@ def updateAccounts(accounts):
 
 class Account:
     def __init__(self,name):
-        self.balances_lookup = {'Compte courant': 0, 'Girokonto': 1, 'Compte épargne primaire': 2,
-                           'Compte épargne secondaire': 3, 'PayPal': 4, 'Geldbeutel': 5, 'Visa': 6}
+        self.balances_lookup = {'Compte courant': 0, 'Girokonto': 1, 'Compte épargne': 2,
+                                'PayPal': 3, 'Geldbeutel': 4, 'Visa': 5}
         self.name  = name
         self.balance = self.getBalance(name)[0]
         self.date = self.getBalance(name)[1]
@@ -75,15 +75,14 @@ class Account:
         return self.date
 
 
-balances_lookup = {'Compte courant': 0, 'Girokonto': 1, 'Compte épargne primaire': 2,
-                           'Compte épargne secondaire': 3, 'PayPal': 4, 'Geldbeutel': 5, 'Visa': 6}
+balances_lookup = {'Compte courant': 0, 'Girokonto': 1, 'Compte épargne': 2,
+                    'PayPal': 3, 'Geldbeutel': 4, 'Visa': 4}
 
 balances = getBalances()
 
 CC_LUX = Account('Compte courant')
 GK_DE = Account('Girokonto')
-CE_LUX = Account('Compte épargne primaire')
-CE_LUX1 = Account('Compte épargne secondaire')
+CE_LUX = Account('Compte épargne')
 PP = Account('PayPal')
 GB = Account('Geldbeutel')
 VISA = Account('Visa')

@@ -5,7 +5,7 @@ from tagging import tag,tagObject
 import csv
 import datetime
 from Transaction import Transaction
-from Account import CC_LUX,CE_LUX,CE_LUX1,GK_DE,PP,VISA, GB, readExpense, transferAccount
+from Account import CC_LUX,CE_LUX,GK_DE,PP,VISA, GB, readExpense, transferAccount
 
 from commonFunctions import readCSVtoObject,object2list,list2object,readCSVtoList,readCSVtoObject, accountName2account, defineFiles, displayTransacts
 from convert import saveMonths,save
@@ -153,7 +153,7 @@ def importSave(file,account):
     print("PP balance "+str(PP.balance))
     displayTransacts(new_transacts)
     saveMonths(months)
-   # saveObject(account_movements,"Account Movements")
+    saveObject(account_movements,"Account Movements")
 
 
 def importPayPal(file):
